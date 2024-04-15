@@ -1,0 +1,18 @@
+Stores data under an alias
+
+Pretty much like every other language...
+
+Best Practices for Py:
+    Variables should be snake_case
+    Start with lowercase or underscore
+    Letters, numbers, underscores
+    Case sensitive
+    Don't overwrite keywords
+    Constants are all caps
+
+Dunder(?) variables:
+    __debug__
+        - two underscores
+        - basically are meant to be left alone
+        - don't create a variable with dunders
+        

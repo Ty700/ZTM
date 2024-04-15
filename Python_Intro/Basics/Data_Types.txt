@@ -1,0 +1,32 @@
+Fundamental Data Types:
+    int
+    float
+    bool
+    str => string
+    list (non-modifyable array)
+    tuple (modifyable array)
+    set (map? Forget)
+    dict(hash map)
+
+    complex -> Complex number
+        - If I ever forget what this is... RIP since I am not explaining.
+    
+    bin(number) -> binary version of the number
+    int('0b101', 2) -> will print out 5.
+        - Converts the binary to an int. 2 is the base.
+Classes:
+    => Custom types, like C++
+    => Can group members/methods together to make an obj
+
+Specialized Data Types:
+    Modules used from libraries
+    "Extensions" to Python
+
+None => NULL?
+    - The absense of value
+
+"None => NULL" 
+    - I should prob stop trying to relate everything to C/C++... feel like this is gonna bite me in the butt (like it has every other time I've tried learning Py)
+
+
+

@@ -1,0 +1,9 @@
+some_value = 5
+
+some_value += 2
+
+some_value now equals 7
+
++= is an augmented assigment value operator
+
+Like C... nothing special

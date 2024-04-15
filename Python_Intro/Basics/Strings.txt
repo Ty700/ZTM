@@ -1,0 +1,48 @@
+Strings are just a piece of text
+
+Example:
+    'Hi and goodbye!'
+
+or
+    "Hi and goodbye!"
+
+Can be write with double or single quotes
+
+print(type("Hi and goodbye!"))
+    - will print out 'str'
+
+Long strings:
+    print("""
+    ALL
+    of
+    This                    WILL 
+    BE PRINTED  
+
+
+
+    like this
+    
+    """)
+
+will result in:
+
+    ALL
+    of
+    This                    WILL 
+    BE PRINTED  
+
+
+
+    like this
+    
+This is by far the weirdest thing to me...
+
+String Concatenation:
+    Adding strings
+
+    string = "Hello" + "Tyler"
+
+    print(string) will pritn "HelloTyler"
+
+    String Concatenation only works with strings... weird. Almost like it's string Concatenation and not int Concatenation
+

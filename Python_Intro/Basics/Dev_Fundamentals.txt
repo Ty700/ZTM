@@ -1,0 +1,7 @@
+"Don't read the dictionary."
+    - Don't read all the docs and try and memorize it all.
+    - Just like learning a language, you don't read every word in a dictionary
+    - You understand what exists, and google what you don't know
+    - Learn it, by using it.
+
+

@@ -1,0 +1,11 @@
+iq = 100
+user_age = iq / 5
+
+expression: iq / 5
+    - piece of code that produces a value
+
+statment:
+    iq = 100
+        - a piece of code is an entire line of code that preforms an action
+        - This line assigns iq to be 100
+        - The other computes iq / 5 and assigns the result to user_age

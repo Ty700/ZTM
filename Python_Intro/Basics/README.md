@@ -1,0 +1,1 @@
+Honestly don't know how much I'll write. I have learned a few languages now and all of this is the same.
