@@ -1,0 +1,19 @@
+Escape Sequences
+
+weather = 'It's sunny'
+    -> Python reads the between the first two ''
+    -> Double quotes gets around this 
+        - "It's Sunny"
+    
+    -> What if we wanted to do
+        "It's "kind of" sunny"
+    
+    We do:
+        weather = "It\'s \"kind of\" sunny"
+
+        This will print out:
+            "It's "kind of" sunny"
+    
+    \t -> tab
+    \n -> newline
+

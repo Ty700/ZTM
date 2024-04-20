@@ -1,0 +1,13 @@
+This is gonna be tough for me... I always hated this
+
+Strings in python are immutable
+
+name = "Tyler"
+
+we can't change "Tyler" every, str is a constant essentially
+
+no longer at the days of 
+
+name[0] = 'F'
+    -> Strings are immutable and this is illegal in Python.
+    -> Instead, we have to completely reassign the value

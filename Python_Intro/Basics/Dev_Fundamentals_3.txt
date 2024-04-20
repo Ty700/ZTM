@@ -1,0 +1,13 @@
+When should we use a list vs a dictionary?
+
+List = Ordered, single value
+Dictionary = Unordered, can hold multiple value
+
+
+player = {
+    'weapons':  ['sword', 'shield'],
+    'greeting': 'HELLO!',
+    'magic':    ['Fire', 'Ice', 'Shock'],
+}
+
+list = [0, 1, 2, 3]

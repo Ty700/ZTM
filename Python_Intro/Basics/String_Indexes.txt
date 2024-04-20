@@ -1,0 +1,34 @@
+Like C, strings are stored contigously (Spelling?)
+
+name = "Tyler"
+
+name[2] = L
+
+print(name[2]) will print "L"
+
+Python has a unique way to parse a string
+
+we can do 
+
+print(name[0:2]) will print "Ty"
+
+[start: stop: step]
+
+name[::2]
+
+will print "tlr" (I think)
+
+name[1::]
+
+will print "yler" 
+
+name[:2] will print "tyl" 
+
+name[::1] -> default behavior so "Tyler"
+
+name[-1] will print "r"
+    - this is cool tbh
+
+name[::-1] -> will print "relyt"
+    -> name backwards
+
