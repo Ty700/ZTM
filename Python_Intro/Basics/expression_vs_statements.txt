@@ -9,3 +9,4 @@ statment:
         - a piece of code is an entire line of code that preforms an action
         - This line assigns iq to be 100
         - The other computes iq / 5 and assigns the result to user_age
+
