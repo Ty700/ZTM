@@ -53,8 +53,8 @@ class Tyler(Person):
     
     # What if I wanted Tyler class to be able to call Person's speak? 
     def speak(self):
-        # We can do:
-        Person.speak()
+        # We can do: 
+        Person.speak() # Look at 05_Super.py for a better way
         print(f"Hello, I am {self.name}")
 
 me = Tyler("Tyler", 23)
