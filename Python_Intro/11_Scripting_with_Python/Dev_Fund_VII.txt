@@ -1,0 +1,8 @@
+Pick the Right Library
+
+Some libraries can't coexist in the same environment
+    - Version warnings
+
+Pick the latest most modern library and the one most people use
+    - Constantly being updated, etc
+
