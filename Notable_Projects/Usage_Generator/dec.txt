@@ -1,0 +1,12 @@
+#############################################################################################
+# Usage:                                                                                    #
+#     This script creates an ASCII art box to prepend to the top of source files,           #
+#     providing an elaboration on the functionality of the program.                         #
+#                                                                                           #
+# How to use:                                                                               #
+#     Argument 1: 'Infile' -> .txt file that you want the box around                        #
+#     Argument 2: 'Outfile' -> name of the file you want the decorated box to be written to #
+#                                                                                           #
+#     Note: Doesn't support write to a specific directory.                                  #
+#           Assumes the input and output files will be in the same directory as main.py     #
+#############################################################################################
