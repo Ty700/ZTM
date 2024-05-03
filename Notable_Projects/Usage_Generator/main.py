@@ -9,6 +9,9 @@
 #                                                                                           #
 #     Note: Doesn't support write to a specific directory.                                  #
 #           Assumes the input and output files will be in the same directory as main.py     #
+#                                                                                           #
+# Example:                                                                                  #
+#     python3 main.py example.txt dec.txt                                                   #
 #############################################################################################
 
 import sys
