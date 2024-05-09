@@ -1,0 +1,12 @@
+A data struct is a container for data
+    - Backpack
+    - Fridge
+    - Box
+    - Cabinet
+
+We wouldn't put paper in the fridge...
+We wouldn't put ice cream in a backpack for later enjoyment
+
+Same for data structures
+
+You use them for a specific function since some data structures are better than others at certain functions
