@@ -1,0 +1,1 @@
+Hash tables are the goat in data structs. Thats all you gotta know.
