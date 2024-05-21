@@ -1,0 +1,12 @@
+Why Go?
+    - In-demand langauge used by high profile companies
+    - Simimplistic and easy to understnad by design
+    - Built-in dependency management
+    - Familiar C-Style syntax
+
+Technical Features
+    - First-class concurrency primitives
+    - Type safety enforced by compiler
+    - Memory-safe; no use-after-free bugs
+        - Garbage collection
+    - Compiles to machine code for very fast speeds

@@ -1,0 +1,94 @@
+Linux Terminal
+    - terminal emulator and is a crucial part of any linux systme because it basically allows you to access the system through a shell
+    - a shell is a program that takes commands from the user and gives them to the OS's kernel to execute. It's also called the command interreter. The shell gets started when the user
+        logs in or starts the terminal
+    - Linus is a CASE-SENSITIVE OS
+
+    Terminal vs Console?
+        - Terminal is a console opened via a GUI
+
+Linux Command Structure
+    <command> <options> <arguments>
+    Example:
+        ls -la /
+    
+    Example:
+        ping -c 1 8.8.8.8
+
+    Bad Example:
+        ping 8.8.8.8 -c 1
+
+Man Pages:
+    Manual pages
+    
+    Example:
+
+    man ls
+        - gives us a manual for the command "ls"
+        - we can do this for most commands we don't remember how to user
+
+        If you see something like [OPTION]...
+            the [] means that OPTION is optional and the ... means we can have more than one
+
+            thus we can run ls with many different options:
+                ls -lah /
+
+        Example print out for: "man ls" 
+
+        LS(1)                            User Commands                           LS(1)
+
+        NAME
+            ls - list directory contents
+
+        SYNOPSIS
+            ls [OPTION]... [FILE]...
+
+        DESCRIPTION
+            List  information  about  the FILEs (the current directory by default).
+            Sort entries alphabetically if none of -cftuvSUX nor --sort  is  speci‐
+            fied.
+
+            Mandatory  arguments  to  long  options are mandatory for short options
+            too.
+
+        Pressing 'g' will go to the beginning of the man pages
+        Pressing 'G' will go to the end
+
+        Searching for a string top -> down
+            /<string>
+
+        Pressign 'n' will go to the next occurance where <string> is found
+        Pressing 'N' will go the the previous occurance where <string> is found (I believe )
+
+        Searching for a string down -> top
+            ?<string>
+        
+Type
+
+    type <command> 
+        - will give some useful info about the command
+
+Help
+    help <command>
+        - since built-in commands such as cd don't have a man page, we use help
+
+    Example:
+    help cd
+
+    Example:
+
+    cd --help <- This way can work for non-built in cmds as wells
+
+How to serach for command feature/keyword
+
+    man -k <keyword we are searching for>
+
+    Example:
+
+    man -k ifconfig
+
+    man -k "copy files"
+
+    man -k uname
+
+    This is similar to the command: apropos
