@@ -1,0 +1,65 @@
+Perfect Binary Tree
+    - Everything filled in, ie symmetrical
+    - The number of nodes doubles as you traverse down in layers
+        Example: root - 2 kids - 2 kids will have 4 childeren
+
+    - The amount of nodes in the last layer will be the sum of all the other nodes above it + 1
+        Example: 4 childeren = 2 kids + root + 1
+
+        - This means about half of the nodes in the tree are positioned on the last level
+    
+    - If we can avoid looking at the entire bottom layer, we see a different BigO
+        BSTs have a O(log(n))
+            Insert, delete, and lookup
+
+Trees have relationships, hash maps can't conserve relationships
+
+All child nodes are greater than the current node, the node to the left is less than
+
+A node can only have two childeren
+
+Con of BSTs:
+    - When they become unbalanced they can just become linked lists, thus loopup, insert, delete are O(n)
+        - This is where self balancing trees come in (AVL and Red Black Trees)
+    - No O(1) operations
+
+Pros of BSTs:
+    - Better than O(n)
+    - Ordered
+    - Flexible Size
+        - Can keep 
+
+Binary Heap
+    The values of left and right have the same relationship corresponding to the root
+
+    For example:
+        in a max heap, the children just need to be less than the parent/root
+    
+    Great for comparative operations
+
+    - Saying I want people that have a value over 33, then we know from the level the node is at, and up, are > 33
+
+    Operations:
+        lookup O(n)
+        insert and delete O(log(n))
+    
+    Memory heap != Heap Data Structure
+
+    Pros:
+        better than O(n)
+        priority
+        flexible Size
+        fast insert
+        left to right insertion, so we know who was first in line but can reorder if element with higher priority comes
+
+    Cons:
+        Slow lookup
+
+Trie:
+    Specialized tree for text
+    
+    Can be faster than BSTs, AVLs, Heaps, etc
+
+    Allow you to know if a word, or part of a word, exists in text
+
+    

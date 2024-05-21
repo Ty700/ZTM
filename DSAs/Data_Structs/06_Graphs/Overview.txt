@@ -1,0 +1,23 @@
+Graphs are probably the most important data structure
+
+A linked list is a special type of graph, so is a tree
+
+Directed vs Undirected:
+    Directed is not bidirectional, can only traverse one way from a node
+    Undirected is a highway, directed is a one-way street
+
+Weighted vs Unweighted Graph
+    Values can be applied to the edges and nodes
+
+Edges:
+    Lines connecting the nodes
+Nodes:
+    (verticies) -> Things being connected
+
+Cyclic
+    When nodes are connected in a circle fation
+    - start at one node, traverse to all diffferent nodes, and end up at starting node
+
+Acyclic
+    - Nodes are not connected in a circle fation
+
