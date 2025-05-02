@@ -1,0 +1,20 @@
+What is Dynamic Programming?
+
+    Dynamic Programming is an optimization technique.
+    "Dynamic Programming" means nothing - garbage buzz word
+    
+    If you have something you can cache, you can use Dynamic Programming
+
+    Breaking a problem into subproblems and storing their solutions
+
+    Useful for when you run into the same subproblem later, rather than redoing the problem, you use the cached answered
+
+
+What is caching?
+
+    Memoization ~~~ caching
+    Caching is like a backpack
+        - Caching is just a way to hold data in an easily accessible box
+    
+    
+

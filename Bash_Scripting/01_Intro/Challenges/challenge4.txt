@@ -1,0 +1,5 @@
+Create a bash script named ram.sh. Add the shebang so that it will be run by bash
+Add the cmd which displays information about RAM memory
+Run the script in at least three different ways
+
+

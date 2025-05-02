@@ -1,0 +1,109 @@
+We search for everything
+
+Linear search
+    - Find a target value in a list
+    - Sequentially checks each value in a list until the target is found
+    - O(n) -> Slow
+
+Binary search
+    - Splits the list in half, decides if target is on the left or right half
+    - Goes to the left/right half and splits it again
+    - Keeps going
+    - On average O(log(n))
+    - Can only work if the list is sorted
+
+Graph/Tree Traversal
+    - Traversal
+        - Tocuhing every node
+
+    - Searching
+        - Hoping to not touch every node
+    
+    - Sometimes Traversal is said interchangably with Searching
+
+    - Searching with BFS or DFS will be O(nlog(n))
+    - However, Traversal is O(n) since we have to touch every node at least once
+
+Breadth First Search
+    - Start with root node, move left to right across each level before going to next level
+
+                        1
+                    2       3
+                  4   5   6   7
+
+            The number represents the nodes position while Searching
+                - Meaning the 5th node would take 5 searches to get to
+            
+            Another Example:
+
+                    9
+                4       20
+              1   6   15  170
+
+            If we did a BFS search and pushed the value we saw onto a stack, we would get:
+
+            [9,4,20,1,6,15,170]
+
+            - Uses additional memory since we have to track every node and its children in order
+
+Depth First Search
+    - Starts with root node, moves down to the leaf node, before branching to the right
+    - Go as deep as possible before going right
+
+    Doing a DFS on the above example:
+        [9, 4, 1, 6, 20, 15, 170]
+    
+
+BFS vs DFS
+    BFS Pros:
+        - Shortest Paths
+        - Closer nodes
+    
+    BDS Cons:
+        - More memory
+    
+    Use cases:
+        - If we have a max/min heap, and we know that the value would be in the top half, we would use a BFS
+            - Lower half? DFS
+        
+    DFS Pros:
+        - Less memory
+        - Does Path Exist?
+
+    DFS Cons:
+        - Can get Slow
+
+How to calculate time and space complexity of both traversal methods
+    - Time Complexity for both BFS and DFS is O(n) since we touch every node
+
+    BFS Space Complexity
+        - is O(n) as well - since at worst case you need to hold all vertices in the queue then get vertices' children
+        - We have to store an entire level on the tree, so worst case would be O(n/2 +  1) nodes
+            - (n/2 + 1) would be the amount of nodes on the lowest level of the tree
+            - Best case is O(1) if node is root
+
+    DFS Space Complexity
+        - Depends on the implementation
+        - A recursive implemetation can have a O(h) (worst case) with h being the height of the Tree
+        - Using an iterative solution with a stack is actually the same as BFS, just using a stack instead of a queue, so O(n)
+
+
+Questions:
+
+If you know a solition is not far from the root of the tree:
+    I'd use BFS
+
+If the tree is very deep and solutions are rare:
+    DFS
+
+If the tree is very wide:
+    DFS - since BFS would take too much memory
+
+If the solutions are frequent but located deep in the tree:
+    DFS
+
+Deternububg wgetger a path exists between two nodes:
+    DFS
+
+Finding the Shortest path:
+    BFS

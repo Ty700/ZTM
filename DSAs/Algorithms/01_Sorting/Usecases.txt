@@ -1,0 +1,58 @@
+When should I use either sorting method?
+
+Quick and Merge are used most often because of the quicker Big of
+    - Quick has a worst case of O(n^2) if we can't guarntee a pivot that isn't the "greatest" or "smallest" element
+
+Use Cases of:
+    Insertion Sort:
+        Data is small or data is mostly sorted
+            Pros:
+            - Little space
+            - Easy to implement
+
+    Bubble Sort and Selection Sort:
+        - Never
+        - Educational 
+        - Really bad
+    
+    Merge Sort:
+        - Always guarntee a O(nlog(n))
+        - Use if worried about worse case scenario
+        - Worried about space complexity?
+            - Might need to use quick sort or another sort
+        - Not worried about space?
+            - Use Merge
+        
+    Quick Sort:
+        - One of the most popular sorts
+        - Must pick a good pivot as the worst case, with a bad pivot, is O(n^2)
+    
+Can we beat O(nlog(n)) -> Mathmatically impossible for sorting
+    - However, we can imporve on this by doing a non-comparison sort
+        - What?
+        - Entirely different way of sorting
+        - Prior to, we compared by saying "Is this number greater than that number over there?"
+        - Counting and Radix uses the way computers store numbers to sort
+        - Only work with numbers, specifically numbers in a specific range
+        - Other sorting methods can sort universally.
+        - Bucket, Radix, and Counting can only do numbers of a specific length
+
+Questions: 
+#1 Sort 10 schools by distance from house
+#2 eBay sorts listings by the current Bid amount:
+#3 Sort scores on ESPN
+#4 Massive database (can't fit all into memory) beeds to sort through past year's user data
+#5 Almost sorted Udemy review data needs to update and add 2 new reviews
+#6 Temp Records for the past 50 years in Canada
+#7 Large user name database needs to be sorted
+#8 Educational sort
+
+Question:       -> Why?
+#1 Insertion    -> Small dataset
+#2 Quick/Merge  -> Maybe even Radix since it's a number that is usually in a given range. However, bids might not be integers so maybe not
+#3 Quick/Merge  -> Random data, need something fast and reliable. 
+#4 Quick        -> Worst case sure, but can't fit in memory so O(n) for space is not an option
+#5 Insertion    -> Almost sorted
+#6 Quick/Merge  -> Merge if we don't care about memory space, else quick. Can't use radix/counting since temps have decimals
+#7 Merge        -> Merge if we don't care about memory, quick if we can pick a good pivot
+#8 Selection/Bubble -> Education

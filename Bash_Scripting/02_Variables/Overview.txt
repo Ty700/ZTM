@@ -1,0 +1,313 @@
+Variables
+    Example:
+        IP="10.0.0.1"
+
+    We can create a variable in a shell script or in the shell itself
+
+    In a shell we can do:
+        os=Linux
+            - Note: Can not do a space between os and = nor = and Linux
+
+        Now, in the current shell's life os will be Linux
+
+        thus running 'echo $os' it will output "Linux"
+
+    If we have a space in the variable we encapsulate it in spaces
+        Example:
+            distro = "Kali Linux"
+    
+    Bash is a weakly typed prog language. Thus, we don't need to declare a type during the assignment.
+
+    In Bash, there are no floating point numbers, only integers
+
+    We can assign a new variable's value with another variables value by doing:
+        my_distro="$os $distro"
+
+    To remove/undefine a variable:
+        unset distro
+    
+    If we want a variable to be read only:
+        declare -r LOGDIR=/var/log
+        
+        - we can not unset or remove read only variables
+
+    NAMING CONVENTIONS
+        use lower_case variable names
+
+        Consts should be written in UPPERCASE
+
+        Variable names should be descriptive
+
+        Variable names cannot start with a number and cannot contain spaces or other special characters
+
+Variable Expansion and Quoting
+    Assigning a value to a varialbe:
+        version=10
+
+    Referencing the value of a variable:
+        The '$' character introduces parameter expansion, command substitution or arithmetic expancsion
+
+    echo $version
+
+    To access the value of a varaible, call it with a '$'
+
+    Example:
+        age=30
+
+        echo $age 
+            - outputs '30'
+
+    $varialbe_name is actually short hand for ${variable_name}
+
+    Thus 'echo ${age}' also outputs 30
+
+    If we want to append to the end of a variable we can do:
+
+    echo ${age}0
+
+    age now = 300
+
+    Quotiing
+        Quoting is used to remove the special meaning of vertin characters or words
+
+        Bash Quoting Mechanisms:
+            1. Single Quotes
+            2. Double Quotes
+            3. The escape character '\'
+
+        1. Single Quotes
+            Enclosing characters in single quotes preserves the literal value of each character within the quotes
+
+            Example:
+                echo 'I am learning $os and I am $age years old.'
+                
+                Output:
+                    I am learning $os and I am $age years old.
+
+                    Note: Notice how $os and $age is outputted... thus single quotes preserves literal value 
+                    Note: Can't use abberviations like 'I'm' in single quotes
+
+        2. Double Quotes
+            Enclosing characters in double quotes preserves the literal value of all characters within quotes with the exception of:
+                1. $
+                2. ''
+                3. \\
+
+            If we have os=Windows and age=30
+
+            Example:
+                echo "I am learning $os and I am $age years old."
+            
+                Output:
+                    I am learning Windows and I am 30 years old.
+                
+                    Note: Notice how $age and $os are expanded to their values
+                
+            We can also use abberviations and double quotes if we use a backslash before the character
+
+            Example:
+                echo "I'm \"learning\" $os and I am $age years old."
+
+                Output:
+                    I'm "learning" Windows and I am 30 years old.
+
+                    Note: Notice the I'm and "learning" which isn't possible using single quotes
+            
+        3. Escape character
+            \ - Bash escape character
+
+            preserves the character that follows with the exception of a newline
+
+            Example:
+                echo "I am learning \$os and I am \$age years old."
+                
+                Output:
+                    I am learning $os and I am $age years old.
+
+                    Note: Notice how $os and $age did not expand to their values as the \ prevents it.
+                
+            You can use \ in single and double and it will preserve the literal values
+
+            Note:
+
+            Say we wanted to print: C:\Windows
+
+            Simply doing: echo C:\Windows will result in: C:Windows
+
+            We need to add another \, thus 'echo C:\\Windows' will output C:\Windows
+
+Enviornment and Shell Local Variables
+    Everytime we start a terminal window, a collection of predefined variables are set with some dynamic values and are used to customize the way the system works and behaves
+
+    There are two:
+        Enviornment vars and Shell Variables
+
+    Enviornment Variables
+        - Are inherited by any child shells or processes
+        - Used to pass information to processes that are spawned from the current shell
+        - Displated using env or printenv
+
+    Shell Variables 
+        - Are contained exclusively within the shell in which they are set 
+        - displayed using 'set'
+
+    User configuration file: ~/.bashrc
+    System-wide configuration file: /etc/bash.bashrc and /etc/profile
+
+    Enviornment variables are useful when you want to change the default behavior of the system
+
+        Example:
+            Adding the path of bash scripts you want to run in any directory
+
+    Enviornment vars are sometimes called exported vars
+
+Getting User Input
+    Bash provides the 'read' function
+
+    Example:
+        read name 
+    
+    The shell will then wait until the user hits enter. Whatever is typed before hitting enter will be assigned to the name variable
+
+    echo $name 
+
+    Output:
+        Will be whatever is typed by the user
+
+    Example:
+        read name
+        Tyler
+
+        echo $name
+
+        Output:
+            Tyler
+
+    We can do more than one this way as well...
+
+    Example:
+        read name age city
+
+        Tyler 23 London
+
+        echo $name
+            Output: Tyler
+        
+        echo $age 
+            Output: 23
+        
+        echo $city
+            Output: London
+
+    There is a default argument to read called 'REPLY' where the response is stored if a var name is not given.
+
+    Example:
+        read
+
+        100
+
+        echo $REPLY
+        Output: 100
+
+    -p option for read command is for prompt
+
+    Example:
+        read -p "Enter the IP addr: " ip
+        Enter the IP addr: 10.0.0.1
+
+        echo $ip 
+        Output: 10.0.0.1
+
+Positional Parameters 
+
+    Eaxmple:
+        apt install nginx
+
+        apt     - command/program
+        install - first argument
+        nginx   - second argument
+
+        command and parameters are seperated by interal field separators or IFS. Default is white space
+
+    Parameters referenced by a name are called Variables
+
+    Parameters referenced by a number are called positional parameters.
+
+    Parameters referenced by a special symbol are auto-set parameters 
+
+    Example:
+        ./script.sh filename.txt directory1 10.0.0.1
+
+        $0 => the name of the script itself (script.sh)
+        $1 => the first positional parameter (filename.txt)
+        $2 => the second positional parameter (directory1)
+        $3 => the last positional parameter (10.0.0.1)
+
+        Note: If there are 10+ parameters we would access them by doing ${10} since $10 would be just $1 
+
+    To provide a parameter with a default value:
+        echo "${1:-default_value}"
+
+        so if we had:
+            echo $1
+            it would output default_value
+
+    See pos_para.sh, drop_packets.sh, and drop_packets_args.sh for examples
+
+Special Parameters  
+    $0 -> the name of the script itself
+    $@ and $* -> a string representation of all positional Parameters
+    $# -> the number of th epositional arguments
+    $? -> the most recent foreground command exit status
+    $$ -> the proces ID of the shell
+
+$@ vs $*
+
+    Both $@ and $* expand to a string representation of all positional parameters but differ when they are wrapped inside double quotes
+
+    $@ -> the word splitting is performed and $@ = "$1 $2 $3"
+    "$@" -> word splitting is not performed and "$@" = "$1" "$2" "$3"
+
+    $* is the same as unquoted $@
+
+    "$*" will palce the first character of the IFS variable between parameters
+
+    $@ Example:
+        touch $@
+            if we had a script that had 'touch $@' and called it with:
+                ./filename.sh "my file.txt" "his doc.txt"
+
+                it would create 4 files
+                    1. my
+                    2. file.txt
+                    3. his
+                    4. doc.txt
+    "S@" Example:
+        touch "$@"
+            if we had a script that had 'touch "$@"' and called it with:
+                ./filename.sh "my file.txt" "his doc.txt"
+
+                it would create 2 files
+                    1. my file.txt
+                    2. his doc.txt
+
+    $* Example:
+        Same as $@ Example
+
+    "$*" Example:
+        touch "$*"
+            if we had a script that had 'touch "$*"' and called it with:
+                ./filename.sh "my file.txt" "his doc.txt"
+
+                it would create 1 file:
+                    1. 'my file.txt his doc.txt'
+
+            Note: We can override the IFS to be:
+
+            IFS=,
+            touch "$*"
+
+            This would still create one file, but the name would be:
+                    1. 'my file.txt,his doc.txt'
+
+    Most times we would use "$@"

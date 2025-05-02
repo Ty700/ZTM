@@ -1,0 +1,8 @@
+1. List all aliases of the system
+2. Run the original ls command and not the alias
+
+My answer:
+	1. I would run: alias 
+		in a shell to get all the aliases of the system
+	2. I would run: /ls
+		in a shell to run the default ls command and not the alias

@@ -120,7 +120,7 @@ def main() -> None:
     # Traverse the tree
     my_bst.traverse()
 
-    num_to_find = 21
+    num_to_find = 20
     print('Trying to find: %d' % num_to_find)
     node_found = my_bst.lookup(num_to_find)
 

@@ -1,0 +1,8 @@
+# Suppose you connect frequently to a server located in a remote data center by running ssh -l u123 -p 9956 191.169.0.1
+# Create an alias named main for the command and make it persistent after reboot
+
+My answer:
+	I would append the following to the bashrc file:
+
+	alias main='ssh -l u123 -p 9956 191.169.0.1'
+

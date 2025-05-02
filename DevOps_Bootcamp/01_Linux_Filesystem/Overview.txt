@@ -1,0 +1,423 @@
+Everything is a file in Linux
+
+If we insert an external media, we have to mount it to a directory (which is a special kind of file in Linux)
+
+For Example, when we insert a USB, it's auto mount (most times) to a directory in the media directory
+    - linux ususally makes a new dir that is the name of usb/media 
+
+The File System Standard Hierarchy Standard
+    /bin - contains binaries or user executabe files which are available to all users
+    /sbin - contains applications that only the superuser will need
+    /boot - contains files required for starting your system
+    /home - where you will find users' home directories. Under this dir there is another dir for each user
+    /dev - contains device files
+    /etc - contains most, if not all system-wide config files
+    /lib - contains shared library files used by different applications
+    /media - is used for external storage will be auto mounted
+    /mnt - is like /media but it's not very oftenly used these days
+    /proc - holds data about computer hardware and kernel. Made on startup 
+    /run - tmp file system stored in ram, used only by processes
+    /sys - contains info about devices, drivers, and some kernel features
+    /srv - contains data for servers
+    /tmp - tmp files for applications or for non-privileged users
+    /usr - user home directories in the old days. Contains many other files now
+    /var - contains file of variable length like log files
+
+Path Names
+
+    Relative and absolute
+        absolute - complete path from the root dir
+            /home/tyler
+
+        relative - relative path from the current directory
+            ../../home/tyler
+        
+        relative paths can have a single dot (.) or double dot (..)
+
+        .. = one level above current dir
+        . = current dir 
+
+ls in-depth
+
+ls -la
+    output info about all the files/dirs within a directory
+        -a = all
+        -l = long listing format
+    
+    running ls -la in ~/ZTM/DevOps_Bootcamp results in: 
+        total 20
+        drwxrwxr-x 4 tyler tyler 4096 Jun 28 16:01 .
+        drwxrwxr-x 8 tyler tyler 4096 May 15 20:37 ..
+        drwxrwxr-x 2 tyler tyler 4096 May 15 21:05 00_Linux_Terminal
+        drwxrwxr-x 2 tyler tyler 4096 Jun 28 16:01 01_Linux_Filesystem
+        -rw-rw-r-- 1 tyler tyler  354 May 22 20:49 README.MD
+
+        10 Characters on the left indicate premissions and file type
+            The first character can be a few diffrent things:
+                - = regular file
+                d = directory
+                l = symbolic link
+
+            The next 9 characters represent a file premission
+                3 groups of 3 from left to right:
+                    owner | group owner | others
+
+        The number after is the number of harlings
+
+        The name of the user who owns the file
+
+        File size
+            - if a directory will always be 4k
+            - this size is the inode
+            - there is an argument that displays the directories true contents size
+
+        Modification time
+
+        File/Dir name
+
+For optional arguments of ls, do man ls
+
+
+File Timestamps
+    Every file on linux has three timestamps:
+        1. The access time stamp or atime is the last time the file was read
+            - ls -lu
+        
+        2. The modified timestamp or mtime is the last time the contents of the file was modified 
+            - ls -l
+            - ls -lt
+            
+        3. The changed timestamp ctime is the last time when some metadata related to the file was changed 
+            - ls -lc
+        
+        To view these times run: stat <path_to_file>
+            Example:
+                stat Overview.txt
+
+                Output:
+                    File: Overview.txt
+                    Size: 3652            Blocks: 8          IO Block: 4096   regular file
+                    Device: 10302h/66306d   Inode: 34078875    Links: 1
+                    Access: (0664/-rw-rw-r--)  Uid: ( 1000/   tyler)   Gid: ( 1000/   tyler)
+                    Access: 2024-07-01 17:28:45.254817703 -0500
+                    Modify: 2024-07-01 17:28:45.234817948 -0500
+                    Change: 2024-07-01 17:28:45.234817948 -0500
+                    Birth: 2024-06-28 16:01:36.231425680 -0500
+
+                Acesss - Last time file was accessed
+                Modify - Last time the contents of file was changed
+                Change - Last time file permissions or some other metadata of the file was changed
+
+File types in Linux
+
+    Linux determines the file type via a code in the file header and not the file extension
+    Quite common in linux for files to not have any extension at all
+
+    That being said
+        .log - probably a log file
+        .conf - probably a config file
+
+        However, this is a convention... not a requirement
+
+    For example, if I have a .jpeg - penguin.jpeg with a file that is JPEG
+    Then I chnage the name to penguin.png, the file type will remain JPEG
+
+    Some applications require a certain extension on files
+        - Thus, extensions are only useful for graphical applications
+
+    Running the command 'file' on any file, or using * at the end of a path, will tell you the file type of the single file or all of them in the path
+
+Viewing files
+    The entire config of the linux system is saved in text files
+        - Groups, network config, network policy, user accounts, etc, are all saved in text files
+
+    How to read any text file in Linux:
+
+        Graphical Interface:
+            gedit
+                - For lame linux users
+        
+        Terminal Options:    
+            'cat'
+                - will output the contents of the text into the 00_Linux_Terminal
+            
+            'vim'
+                - will open vim editor
+            
+            If the output of the text file exceeds the terminal window, we can use the 'more' or 'less' commands
+                - known as pagers
+            
+            'less'
+                - less <path_to_file>
+                    - this command is similar to running the 'man' cmd
+                    - In the sense that it will display the contents of a file one page at a time
+                
+            'tail'
+                - outputs the last few lines of a file
+                    - default is the last 10 lines
+                - useful if you are only interested in the last few events in a log file or some
+            
+                - we can override the amount of lines printed using the -n option
+                    - only for that instance of the command
+                
+                - If we want to print the contents from a specific line number and down, we can do:
+                    tail -n +20 <path_to_file>
+                        - this will print from line 20 to the EOF
+                
+                - To actively watch the contents of a file:
+                    tail -f <path_to_file>
+                        - the contents of the file will be updated in real time
+            
+            'head'
+                - the opposite of tail
+                - prints the first few lines of a file
+            
+            'watch'
+                - allows you to watch the program output change overtime
+
+                Example:
+                    watch ls
+                        - will run ls every 2s (default) allowing the user to watch the output change
+                        - We can use -n option to change the time interval
+                        - We can use -d option to highlight the 
+
+Creating files and directories
+    touch
+        - useful for making files
+        - if file exists already, updates the modify, and access time
+
+    mkdir
+        - 'make directory'
+
+Coping files
+    cp
+
+Piping and Command Redirection
+    Pipes allow us to send the ouput of one command to the input of another command
+        Example:
+            ls -lSh /home/ | head
+                - first, it sorts the files and dirs in /home/ by human size then it forwards it to the head command
+                    therefore, we get the first 10 files/dirs in /home/ that are the largest in size
+     
+
+    Command Redirection
+        - we can redirect the output of a command to a file
+
+        Example:
+            cat ./Overview.txt > ./Overview_2.txt
+                - this command will take the output of 'cat ./Overview.txt' and put it into a new file Overview_2.txt
+                - Note: > will overwrite the file if it exists or create the file if it doesn't
+            
+            What if we don't want to overwrite, rather append?
+                - Use >>
+                    Example:
+                        cat ./Overview.txt >> ./Overview_2.txt
+                - The double greater than will not overwrite the contents
+                - If the file doesn't exists, it will create it.
+                - If it does exist, it will append
+    
+    In Linux, when running a command it is as follows:
+
+        STDIN(0)     -------------    
+            -------->|  COMMAND  |---+--->  STDOUT(1)   
+                     -------------   |      
+                                     +----> STDERR(2)
+
+        Thus, if we put an output number followed by a redirection operator, we can tell linux what stream we want to redirect
+        If we don't specify a number, it assumes stream 1 which is STDOUT
+
+        However, what if I want to redirect STDERR?
+
+        Example:
+            <command> 2> command_error.txt
+                - Note: No space is allowed between number and redirect operator
+                - The same rules of overwriting/appending 
+            
+            <command> 2>> command_error.txt
+                - Append while the one on 232 overwrites
+
+    It is possible that a command outputs to both streams
+
+        How can we redirect both?
+            Do both >/>> and 2>/2>> in the same line    
+                Example:
+                    <command> > output.txt 2> error.txt
+
+    How to redirect STDOUT and STDERR to the same file?
+
+        <command> > output.txt 2>&1
+            - The &1 will redirect the error to the same file as stdout 
+                - Without the &, it will redirect the err to a file called 1
+
+    What if I want to redirect the output to a file and the terminal?
+
+        The 'tee' command
+
+            'tee' comes from the 'T-splitter'
+                Example:
+                    <command> tee output.txt
+                        - By default, it overwrites
+                            If I want to append use the -a option
+                We can redirect to more than one file
+                    Example:
+                    <command> tee output.txt output2.txt another_same_output_file.txt
+                        - it will write the output of the command to all three files:
+                            output.txt
+                            output2.txt
+                            another_same_output_file.txt
+
+Finding Files and Directories 
+    Linux is a file centric OS
+    Finding files in directories is a common task 
+
+    The 'which' command 
+        - locates a command and returns the abs path of the exe that is called when the command is run 
+        - does this by searching the path of exe files 
+        - useful if you want to make an alias 
+        - returns the first found cmd 
+            - the option '-a' returns all found 
+    
+    The 'plocate' command 
+        - faster than find 
+        - doesn't search in the file system in real time 
+        - uses a pre-built database where as the find cmd searches the file structure 
+        - plocate searches by name and returns a list of path names containing the name in the path 
+        - database used by plocate needs to be updated daily
+            'sudo updatedb' 
+        - the database created is the file /var/lib/plocate/plocate.db 
+
+        Example:
+            plocate DevOps_Bootcamp
+
+        - if we want to search for the base name only
+            use the -b option 
+            - this is useful if we know the file name but not the directory 
+            - instead of getting a list of paths with the name we searched for in the path, it will return only the path with the base name 
+
+        Has useful options like -i, -e
+
+    The 'find' command 
+        More powerful and flexible results 
+
+        plocate has a few drawbacks 
+            - searches its own database that needs to be updated
+            - few options 
+            
+        With find we can search for very specific details that plocate can't 
+            - name, owner, group, type, permissions, date, etc 
+        
+        Sytax:
+            find <path> <critera>
+        
+        Example:
+            find . -name Overview.txt 
+                - will search in the current directory and try and find "Overview.txt"
+            
+            find . -iname Overview.txt 
+                - will serach in the current directory and try and find "overview.txt" or "Overview.txt"
+            
+            find -iname Overview* 
+                - will search in the current directory and try and find "Overview" or "overview" with anything behind the w 
+                - maybe we don't know the extension 
+            
+            What if we want to find for a certain substring?
+                find -name "*rep*"
+                    - anything return will have "rep" in the file 
+                
+            find . -name Overview.txt -delete 
+                - will find and delete the file 
+                - will need perms to delete files if user doesn't have the right prems to delete it 
+
+        Finding files by type 
+
+            find /etc/ -type d 
+                - will search in the /etc/ and return all the directories
+                    - will go through each subdirectory of the directories in /etc/
+
+                - to limit depth of search 
+                    find /etc/ -type -maxdepth 2 d 
+                        - will now only go 2 directories past /etc/
+
+        Finding files by permissions 
+            find /etc/ -perm 755 
+                - will return a list of files with the permissions 755 
+
+        If we combine search options like: 
+            find /etc/ -type -maxdepth 2 d -perm 755 
+                - there is a logical AND between them
+                - thus will only return paths that are both directories and permissions of 755 
+
+        Search for size
+            find /var -type f -size 100k -ls 
+                - will return path of files with size of 100k 
+
+            we can use the +/- option to say greater than or less than 100k 
+
+            find /var -type f -size +100k -ls 
+                - Will return files > 100k  
+            
+            find /var -type f -size -100k -ls 
+                -Will return files < 100k
+
+            find /var-type f -size +5M -size -10M 
+                - will find files that are between 5 and 10 MBs 
+
+
+        Search for timestamps 
+            find /var -type f -mtime 0 -ls 
+                - will return a list of files that have been modified within the last 24 hours 
+
+            find /var -type f -mtime 1 -ls
+                - will return a list of files that have been modified within the last 1 - 2 days ago 
+
+            find /var -type f -atime +1 -ls 
+                - will return a list of files that have been accessed 1 or more days ago 
+
+            find /var -type f -mmin 60 -ls 
+                - will return a list of files that have been modified within the last hour 
+
+        Search by owner, group, or user  
+            -owner <owner_name>
+
+            -group <group_name>
+
+            -user <user_name>
+
+            Example:
+                find /var/ -type f -user tyler -ls 
+                    - will return files that belong to the user "tyler" 
+                
+                find /var/ -type f -not -user tyler -ls 
+                    - will return files that do NOT belong to the user "tyler"
+
+Find and Exec 
+    Sometimes we want to exec the commands found 
+
+    We want to see the contents of the files that were modified within the last 24 hours 
+
+    2 steps 
+
+    1. Find the files 
+
+        sudo find /etc -type f -mtime 0 
+
+    2. Use the exec option 
+
+        sudo find /etc -type f -mtime 0 -exec cat {} \;
+
+        - {} - will be replaces by each file found by the find command 
+        - \; - always there. Ends the -exec command 
+
+    We want to backup or make a copy all the files 
+
+        sudo mkdir /root/backup 
+
+        sudo find /etc/ -mtime -7 -type f -exec cp {} /root/backup \;
+            - will find all the files in /etc/ that have been modified in the last 7 days and make a copy of them and place them in /root/backup
+
+    To ask the user to confirm each command run -ok inplace of -exec
+
+
+
+            
+            

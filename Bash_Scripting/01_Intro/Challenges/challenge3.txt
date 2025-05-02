@@ -1,0 +1,5 @@
+List all avaliable shells 
+List the current shell
+
+1. cat /etc/shells
+22. echo $0

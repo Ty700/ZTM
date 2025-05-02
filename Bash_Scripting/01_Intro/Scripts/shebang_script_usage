@@ -1,0 +1,4 @@
+#!/usr/bin/python3
+# Note: Delete line 1 and run the script again to see the error
+import sys
+print(sys.version)

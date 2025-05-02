@@ -1,0 +1,140 @@
+BASH:
+	Bourne Again Shell (BASH)
+
+
+Bash Aliases
+	A bash halias is a shortcut to a command
+	
+	Run the 'alisa' command without any args to see currently set aliases.
+
+	Example:
+		running 'ls' is actually running 'ls --color=auto'
+	
+
+	If you want to run the actual command 'ls' without the alias
+	- Run: '/ls'
+	
+	Creating new aliases
+		alias alias_name='command_to_run'
+	
+		Example:
+			alias c='clear'
+
+		Now we can run 'c' and it will clear the screen
+
+		However, if we close the terminal the alias will be destroyed.
+		To make it persistent, we declare it in the bashrc file
+	
+	The bashrc file is read only on terminal startup... to refresh config file for current terminal
+		Run: 'source bashrc'
+
+	Usage for alias
+		What if everyday we go to work and login to the same server
+
+		We would have to run:
+			ssh -p 2299 user@192.168.1.1
+
+		However, to avoid the typing we can create an alias called 'connect' by running:
+			connect='ssh -p 2299 user@192.168.1.1'
+
+		Now, everyday we can run the 'connect' command and avoid the typing
+
+Shell vs Shell Scripts
+	
+	Shell
+		A shell (command interpreter) is an interface between the user and the kernel
+
+		The shell gets started when the user logs in and starts the terminal
+
+		To see what shell has started run:
+			echo $0
+
+			or 
+
+			echo $BASH
+
+		The most common is BASH, but there are BOURNE, Z Shell, C Shell, and others
+
+		To list all valid login shells:
+		Run: 'cat /etc/shells'
+
+		and to change the default shell:
+		
+		Run: 'chsh -s /bin/bash'
+
+	Shell Scripts
+		Essentially a executable text file that contains shell commands and other specific programming structures that are exe sequentially
+
+		When you find yourself doing the same task over and over, we should create a shell script to automate the task
+
+		Shell scripts we can create our own tools, simple applications, etc. Since the scripts are tested, the errors are reduced.
+
+		Say we make a tool that filters the SQL database, and backs it up. All the junior sysadmin has to do is run the script and the backup is done...
+
+		No chance of them deleting it.
+
+		Other usages for shell scripts:
+			Monitoring the system
+			Data backup and restoring
+			Creating an alert system
+			User administarion 
+			Security auditing
+			many more
+
+		See first_script.sh for the first script we made Example
+	
+The Bash Shebang
+	The shebang looks something like:
+		#!/bin/bash
+
+		This tells the interpreter which shell to use when exe the script
+
+		#!/bin/bash tells is to use the bash shell
+
+		However, if it was:
+
+		#!/usr/bin/python3
+
+		it will parse the file in python3
+
+		If there is not a shebang, bash is the default interpreter
+
+Comments in Bash
+	Bash ignores everything on the line after a # something
+
+	Exception:
+		when the next character after a # is a ! for the shebang
+
+		# This is a Comment
+
+		#! This is interpreted as a shebang
+
+	Doesn't support multi-line comments
+
+	A trick for multi-line comments:
+
+		: ' 
+			This
+			is
+			A
+			multi
+			line
+			comment
+			in 
+			bash
+		'
+	This is weird and I prob won't use it... prob just use a bunch of #\
+
+Running Scripts
+	Most common
+		Adding exe perms to file using chmod
+		then running it by ./script or the abs path
+
+	Without a shebang:
+		bash script.sh
+		
+		or
+		
+		python3 script.sh 
+
+	

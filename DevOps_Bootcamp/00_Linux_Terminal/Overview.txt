@@ -92,3 +92,77 @@ How to serach for command feature/keyword
     man -k uname
 
     This is similar to the command: apropos
+
+Tab Key:
+    - The best thing ever. Autocompletion, not ellaborating. Just do it.
+    - Double tap that B**** to see all avaliable commands/options that start with the substring entered 
+
+    If tab doesn't auto complete, there is a mistake
+
+Keyboard Shortcuts:
+    Ctrl+L -> Clear  -> Same as "clear" cmd 
+    Ctrl+D -> Closes -> Same as "exit" cmd
+    up/down arrow -> Previous commands ran
+    Ctrl+E -> Moves cursor to the end of the line
+    Ctrl+A -> Moves cursor to the beginning of the line
+    Ctrl+U -> Clears all characters typed in the cmd line
+    Ctrl+C -> Interrupt
+        - Note: These processes can be resumed
+
+The Bash Command History
+    - Stores all the cmds the user runs in .bash_history that resides in the user's home dir
+    - echo $HISTFILESIZE will display the # of commands saved
+
+    - Ctrl + R -> Bash history searching
+
+Running Commands Without Leaving a Trace
+    - Erasing the entire history
+        - history -c 
+    - What if you don't want it to be saved into history?
+
+    - Have a space in front of the command
+
+    - $ ls
+        - This ls won't be saved in history
+    
+    - $ls 
+        - This one will
+
+    - This behavior is different on different distros
+    - echo $HISTCONTROL=ignoredspace
+        - will now not append to history cmds run with a leading space
+
+Recording the Date and Time for Each Line in History
+    - set HISTTIMEFORMAT="%d/%m/%y %T "
+        - %d - Day
+        - %m - Month
+        - %y - Year
+        - %T - Time
+
+Root vs Non-Privileged
+    1. Non-privileged users - have no special rights on the system
+    2. the root user (su or the admin)
+
+    - Root privileges are the powers that the root account has on the system. The root account is the most privileged on the system and has absolute power over it.
+    - Root exists on any linux sys is there's only one
+    - It's not recommended to use root for ordinary tasks.
+    - When root privileges are needed, you only become root to become that task
+
+    Gaining root acces:
+        $sudo su
+        
+        "sudo"
+            - superuser do
+        
+        sudo on Ubuntu = wheel on CentOS
+
+        This will become root on the current terminal
+
+        $sudo su -
+            - root working space
+            - exit takes you out
+
+        sudo <cmd>
+            - become root for that specific command 
+        
+        

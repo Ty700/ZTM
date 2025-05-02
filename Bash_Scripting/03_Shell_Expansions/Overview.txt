@@ -1,0 +1,256 @@
+Command Line Processing
+    1. Tokenization
+    2. Command Identification
+    3. Shell Expansions
+        - Brace Expansion
+        - Tilde Expansion
+        - Parameter and variable Expansion
+        - Command substitution
+        - Arithmetic Expansion
+        - Process substitution
+        - Word splitting
+        - Filename expansion (Globbing)
+    4. Quote Removal
+    5. Redirections
+    6. Command Execution
+
+    We have seen some basic expansion already
+        '$' character
+
+        Example:
+            echo $PATH
+                - expands $PATH to its value
+
+Brace Expansion
+    {} - It generates arbitrary strings
+
+    Brace Expansion types:
+        1. String lists
+        2. Range (sequence) lists
+
+    echo {old,new,current,backup}
+    
+    Output: old,new,current,backup
+
+    Syntax:
+        prefix{value1,value2,value3}suffix
+
+        Example:
+            {a...k}
+            {01...10}
+            file{01..15}.txt
+            Day{1...7}
+    Example:
+
+        echo 01-{old,new,current,backup}.txt
+
+        Output: 01-old.txt 01-new.txt 01-current.txt 01-backup.txt
+
+        If we use touch rather than echo it will create those 4 files
+
+        Same if we use rm, it will rm those 4 files
+
+        Note:
+            Not allowed to put any spaces between the values in the {}
+
+            Example:
+                {value1, value2,value3}
+                    - not allowed
+
+            Brace Expansion within a brace expansion is allowed
+
+            Example:
+                {value1,{10,20,30}value2,value3}
+                    - is allowed
+
+                Expands to:
+                    {value1,10value2,20value2,30value2,value3}
+    
+    Expansion Incrementer(?)
+
+        echo {1..100..2}
+
+        Output: 1 3 5 7 ... 99
+
+Tilde Expansion
+    It expands to home directories, current or previous working directories from the directory stack
+
+    Example:
+        ~ => $HOME of the cur user
+        ~USER => User's home dir
+        ~+ => $PWD
+        ~- => $OLDPWD
+
+Parameter Expansion
+    $ symbol introduces parameter expansion
+
+    Syntax:
+        $parameter
+        ${parameter}
+
+    Examples:
+        echo $HOME
+        echo ${HOME}
+
+    echo ${HOME,,}
+        - will change all characters of $HOME to lowercase
+
+    echo ${HOME^^}
+        - will change all characters of $HOME to uppercase
+
+    ping -c 3 ${ip:-8.8.8.8}
+        - this will ping the ${ip} 3 times... if $ip is not set then it will take the default value of 8.8.8.8
+        - THIS WILL NOT SET ${IP}
+
+    ping -c 3 ${ip:=8.8.8.8}
+        - this will ping the ${ip} 3 times... if $ip is not set then it will take the default value of 8.8.8.8
+        - THIS WILL SET ${IP}
+    
+
+Command Substitution
+    It means saving the output of a command in a variable
+
+    Syntax:
+        'command' or $(command)
+
+    Example:
+        p="$(ping -c 3 8.8.8.8)"
+        users="'cut -d: -f1 /etc/passwd'"
+        
+        echo $users
+        Output:
+            cut -d: -f1 /etc/passwd
+        
+        Example:
+            now='date'
+            echo $now -> echo date 
+            Output would be the current date
+
+Arithmetic Substitution
+    It's used to preform mathematical computation
+
+    Syntax:
+        $((expression))
+
+    x=$((7*9))
+
+    echo $x
+    Output:63
+
+    Operators follow the same as general math
+
+    Bash also allows the 'let' built-in 
+
+    Example:
+        let y=2**8
+
+    Note: There is not an overflow check
+
+    Example:
+        y=2**128
+
+        This will result in 0 as it's an overflow
+    
+    Arithmetic can only be done with ints 
+
+    If you want floats use the 'bc' command or basic calculator command
+
+    bc won't display the fractional part by default
+
+    Need to specify the scale 
+
+    Example:
+        echo "11/4" | bc 
+        Output: 2
+
+        echo "scale=2;11/4" | bc
+        output: 2.75
+
+Process Substitution
+    It means to reference the output fo a process as a file
+
+    Syntax:
+        <(command)
+    
+    Example:
+        grep -w "root" <(cat /etc/passwd)
+    
+    Example:
+        <(ls)
+        The output will be treated as a file 
+
+        Thus cat <(ls) will output the ls of the cur dir
+
+        Example:
+            We want to compare the contents of two directories
+
+            mkdir dir1 dir2
+
+            touch dir1/a.txt dir1/b.txt dir1/c.txt dir1/d.txt
+
+            ls dir*
+
+            Output:
+                dir1:
+                a   b 
+
+                dir2:
+                a   c 
+            
+            diff <(ls dir1) <(ls dir2)
+
+            Output:
+                2c2
+                < b 
+                ------
+                > c 
+
+                this is saying that C is in dir2 but not dir1 and b is in dir1 but not dir2 
+
+                However, the point is the output of ls dir1 and ls dir2 is treated as a file...
+
+                This saves us from redirecting the output of ls dir1 and ls dir2 to a file, and then comparing the two files 
+
+Word Splitting 
+    It means splitting into individual words the result of the unquted expansions 
+    Bash uses the IFS variable to perform word splitting
+
+    IFS default is whitespace
+
+    echo $IFS
+    Output: " "
+
+    echo ${IFS@Q}
+    Output: $' \t\n' 
+
+
+    Example:
+        dir1="d1 d2 d3"
+
+        echo $dirs
+
+        echo $dirs 
+        Output: d1 d2 d3 
+
+        mkdir $dirs    
+            - this will use the IFS variable as the delimiter and will split it to mkdir d1 d2 d3 
+            - thus will make 3 directories
+
+        Now, if we did:
+        mkdirs "$dirs" -> mkdirs "d1 d2 d3" 
+            - this will make a directory called "d1 d2 d3"
+            - word splitting doesn't happen here b/c of the double quotes 
+
+        if we make IFS=":"
+
+        and do dirs="d1:d2:d3"
+
+        and do mkdir $dirs it will split dirs based off the :'s and will make 3 directories d1, d2, and d3
+
+Filename Expansion (Globbing)
+    Globbing characters
+        * -> matches any string, including emptiness
+        ? -> matches any character
+        [] -> matches a single character from within a range
+
+
